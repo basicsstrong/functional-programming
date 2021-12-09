@@ -18,8 +18,8 @@ import java.util.stream.StreamSupport;
 public class DownstreamCollectors {
 
 	public static void main(String[] args) {
-		
-		Path path = Paths.get("/Users/mohitsinghal/newWorkspace/Functional-Programming/src/com/basicsstrong/functional/section11/EmployeeData");
+
+		Path path = Paths.get(System.getProperty("user.dir") + "/src/com/basicsstrong/functional/section11/EmployeeData");
 		try(Stream<String> lines = Files.lines(path);){
 			
 			
@@ -68,9 +68,9 @@ public class DownstreamCollectors {
 					 employeeList.stream()
 						 .collect(
 								 Collectors.groupingBy(
-									 e -> e.getDesignation(),
+										 Employee::getDesignation,
 									 Collectors.mapping(
-											 e -> e.getSalary(),
+											 Employee::getSalary,
 											 Collectors.maxBy(Comparator.comparing(Function.identity()))
 									 )
 								 )
