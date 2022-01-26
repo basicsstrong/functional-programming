@@ -95,11 +95,11 @@ public abstract class ListFun<T> {
 	
 	//method to add element at specific position
 	public ListFun<T> addEle(int pos, T ele){
-		if(pos < 1 || pos > length())
+		if(pos < 0 || pos > length())
 			throw new IndexOutOfBoundsException();
-		if(pos == 1)
-			return this.tail().addEle(ele);
-		return new Const<T>(head(),addEle(pos-1,ele));
+		if(pos == 0)
+			return this.addEle(ele);
+		return new Const<T>(head(),tail().addEle(pos-1,ele));
 	}
 	
 	public void forEach(Consumer<? super T> action) {
